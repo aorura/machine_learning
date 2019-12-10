@@ -27,6 +27,7 @@ print(arr[:,arr[0,:].argsort()])
 지난 1990년대 119개의 크레용 색상을 알파벳 순서로 나열한 텍스트 파일을 생성하는 
 프로그램을 작성한다.
 '''
+'''
 f_pre1990 = open("data/Pre1990.txt", 'r')
 firstSet = {line for line in f_pre1990}
 f_retired=open('data/Retired.txt','r')
@@ -41,18 +42,58 @@ f_added.close()
 outfile=open("data/creyon119.txt",'w')
 outfile.writelines(sorted(firstSet.difference(secondSet).union(thirdSet)))
 outfile.close()
-
 '''
-outfile=open("data/creyon119.txt",'w')
-outfile.writelines(firstSet.union(secondSet))
-outfile.close()
-
-outfile = open('data/intersection.txt','w')
-outfile.writelines(firstSet.intersection(secondSet))
-outfile.close()
-
-outfile=open('data/Difference.txt','w')
-outfile.writelines(firstSet.difference(secondSet))
-outfile.close()
-
 '''
+3.Justices.txt를 참고합니다. 파일의 내용은 아래와 같다.
+(이름, 성, 임명한 대통령, 임명 당시 재직한 주, 임명 연도, 대법원을 사임한 연도)
+대통령의 이름을 입력 받은 후 해당 대통령이 임명한 대법관을 표시하는 프로그램을 작성한다. 
+대법관은 해당 법원에서 근무한 기간에 의해 내림 차순으로 정렬되어야 한다.
+(대법관 사임연도가 0인 경우 2015로 바뀌서 사용한다)
+
+ex>
+	Enter the name of a president:George W. Bush
+	Justice Appointed:
+		John Roberts
+		Smuel Alito
+'''
+
+
+inputfile = open("data/Justices.txt", "r")
+justices = [line.rstrip().rsplit(sep=',') for line in inputfile]
+
+print("President Name: ")
+PresName = input()
+
+#Andrew Jackson Bill Clinton
+result = []
+i=0
+for row in justices:
+    row[4] = eval(row[4])
+    row[5] = eval(row[5])
+    if row[2] == PresName:
+        if row[5] == 0:
+            row[5] = 2015
+        row.append(row[5]-row[4])
+        row.append(i)
+        result.append(row)
+        i += 1
+
+#print(result)
+
+sorted=[]
+for row in result:
+    sorted.append(row[6])
+sorted.sort(reverse=True)
+#print(sorted)
+
+indexed=[]
+for years in sorted:
+    for row in result:
+        if row[6] == years:
+            if row[7] not in indexed:
+                print("{0} {1}, {2}, {3} yesrs".format(row[0], row[1], row[2], row[6]))
+                indexed.append(row[7])
+                break;
+
+
+inputfile.close()
