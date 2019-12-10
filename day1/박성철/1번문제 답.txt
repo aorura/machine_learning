@@ -1,0 +1,28 @@
+class paySystem:
+    def __init__(self):
+        self.workedHours = 0
+        self.hourlyPay=0
+        self.weekPay=0
+        self.__threshold=40
+        
+    def enterHoursAndPay(self):
+        print("Enter Hours worked: ")
+        self.workedHours = int(input())
+        print("Enter Hourly Pay: ")
+        self.hourlyPay = int(input())
+        
+    def calculateWeekPay(self):
+        if (self.workedHours > self.__threshold):
+            self.weekPay = self.__threshold * self.hourlyPay
+            self.weekPay += (self.workedHours-self.__threshold) * self.hourlyPay * 1.5
+        else:
+            self.weekPay = self.workedHours * self.hourlyPay
+    
+    def printWeekPay(self):
+            print("Week's pay: ${:>10}".format(self.weekPay))
+            
+if __name__ == "__main__":
+    ps = paySystem()
+    ps.enterHoursAndPay()
+    ps.calculateWeekPay()
+    ps.printWeekPay()

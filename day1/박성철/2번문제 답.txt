@@ -1,0 +1,45 @@
+class Purchase:
+    def __init__(self):
+        self.article = ''
+        self.price = 0
+        self.quantity = 0
+    
+    def setArticle(self, name):
+        self.article = name
+    
+    def setPrice(self, price):
+        self.price = price
+        
+    def setQuantity(self, quantity):
+        self.quantity = quantity
+        
+class Cart:
+    def __init__(self):
+        self.itemsOfArticle = []
+        
+    def addArticle(self):
+        item = Purchase()
+        print("Enter description of article: ")
+        item.setArticle(input())
+        print("Enter price of article: ")
+        item.setPrice(input())
+        print("Enter quantity of article: ")
+        item.setQuantity(input())
+        self.itemsOfArticle.append(item)
+        
+    def printArticle(self):
+        print("Article    Price    Quantity")
+        for item in self.itemsOfArticle:
+            print("{0}    {1}    {2}".format(item.article, item.price, item.quantity))
+
+            
+if __name__ == "__main__":
+    cart = Cart()
+    
+    yOrN = 'y'
+    while (yOrN == 'Y' or yOrN == 'y'):
+        cart.addArticle()
+        print("Do you want to enter more articles (Y/N)?")
+        yOrN = input()    
+        
+    cart.printArticle()
