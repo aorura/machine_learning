@@ -11,7 +11,9 @@ print(grouped.mean())
 
 means = df['data1'].groupby([df['key1'],df['key2']]).mean()
 print('\n',means)
+
 print('\n',means.unstack())
+'''
 print('\n',means.unstack('key1'))
 
 for name, group in df.groupby('key1'):
@@ -27,3 +29,4 @@ pieces = dict(list(df.groupby('key1')))
 print('\n',pieces['b'])
 
 print('\n\n---\n\n', dict(list(df.groupby('key1'))))
+'''

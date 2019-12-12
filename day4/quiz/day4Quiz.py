@@ -14,5 +14,16 @@ clsNum['Aver'] = (clsNum['Lan'] + clsNum['Math'] + clsNum['Eng']) / 3
 
 print('c.','\n')
 print('\n', clsNum)
+print('\n', clsNum.unstack('Class'))
 
+print('\n', clsNum['Lan']['A'].mean())
+
+
+df5 = pd.concat([clsNum, pd.DataFrame({'Lan':{'A' : clsNum['Lan']['A'].mean(), 'B' : clsNum['Lan']['B'].mean()}, \
+                                    'Math':{'A' : clsNum['Math']['A'].mean(), 'B' : clsNum['Math']['B'].mean()},
+                                       'Eng':{'A' : clsNum['Eng']['A'].mean(), 'B' : clsNum['Eng']['B'].mean()},
+                                       'Aver':{'A' : clsNum['Aver']['A'].mean(), 'B' : clsNum['Aver']['B'].mean()}}, \
+                                   index = ['Aver'])], axis =0)
+
+print('\n', df5)
 #print('\n',grade.pivot_table(columns=['Class','Number']))
