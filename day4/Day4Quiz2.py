@@ -25,3 +25,4 @@ df = pd.DataFrame(data)
 print('\n', df.groupby([df['도시'],df['연도']]).sum())
 
 #print('\n6.', df.pivot_table(columns=['도시','연도']))
+
