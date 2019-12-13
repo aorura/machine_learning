@@ -39,22 +39,10 @@ birthsum.plot(kind='bar')
 #plt.show()
 
 print('8.')
-#normed_sums= birthsum.div(birthsum.sum(axis=1), axis=0)
-names_prop=names.pivot_table(index=['name'],columns='births', aggfunc=sum)
-print('\n', names_prop)
+namesum=names.groupby(names['name']).sum()
+#namesum['prop'] = namesum /namesum.sum()
+print('\n', namesum)
 
+print('9.')
+print('\n', namesum['prop'].sort_values(ascending=False).head(1000))
 
-'''
-
-
-
-for year in years:
-    path = 'data/yob%d.txt' % year
-    frame = pd.read_csv(path, names=columns)
-    frame['year'] = year
-    pieces.append(frame)
-
-df = pd.DataFrame(pieces,columns=columns)
-print('\n', df)
-#print('\n', df.head(10))
-'''
